@@ -14,7 +14,7 @@
 if(file_exists('config.php')) {
     require_once 'config.php';
 }else{
-    throw new \Exception('error.config_missing', 0001);
+    throw new \Exception('error.config_php_missing', 0001);
 }
 
 require_once 'src/classes/twoteAPI.class.php';
