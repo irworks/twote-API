@@ -45,6 +45,7 @@ class TwoteAPI extends API
                 //$person = Person::logout($this->db, $this->header);
                 break;
         }
+        
         if ($person == null) {
             throw new \Exception('user_unknown');
         }
