@@ -57,8 +57,8 @@ class Person extends BaseModel
                 }
             }
 
-        }else{
-            throw new \Exception('error.person.not_found', 1003);
+         } else {
+            throw new \Exception('error.person.not_found: ' . $query, 1003);
         }
     }
 
