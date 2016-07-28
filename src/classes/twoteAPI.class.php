@@ -29,7 +29,6 @@ class TwoteAPI extends API
         parent::__construct($request);
 
         $this->db       = $db;
-        $this->request  = $request;
         $this->header   = $htmlHeaders;
     }
     
@@ -45,7 +44,7 @@ class TwoteAPI extends API
                 //$person = Person::logout($this->db, $this->header);
                 break;
         }
-        
+
         if ($person == null) {
             throw new \Exception('user_unknown');
         }
