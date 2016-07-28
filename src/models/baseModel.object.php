@@ -16,7 +16,7 @@ namespace twoteAPI\Models;
 
 class BaseModel
 {
-    protected $code;
+    protected $code = 200;
     protected $message;
 
     /**
