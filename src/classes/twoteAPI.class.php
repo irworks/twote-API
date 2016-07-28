@@ -23,8 +23,6 @@ use twoteAPI\Models\Person;
 class TwoteAPI extends API
 {
     private $db;
-    private $header;
-
     private $person;
 
     public function __construct($request, $origin, $htmlHeaders, $db, $lang) {
