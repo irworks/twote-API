@@ -24,6 +24,9 @@ class BaseModel
      * @param array $keyValueArray
      */
     function __construct($keyValueArray = array()) {
+
+        var_dump($keyValueArray);
+
         foreach ($keyValueArray as $key => $value) {
             foreach (get_class_vars(get_class($this)) as $varKey => $varValue) {
                 if($varKey === $key) {
