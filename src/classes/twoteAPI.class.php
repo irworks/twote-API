@@ -22,31 +22,37 @@ use twoteAPI\Models\Person;
 
 class TwoteAPI extends API
 {
+    private $db;
+    private $request;
+    private $header;
+
+    private $person;
 
     public function __construct($request, $origin, $htmlHeaders, $db, $lang) {
-        parent::__contruct($request);
+        parent::__construct($request);
+
+        $this->db       = $db;
+        $this->request  = $request;
+        $this->header   = $htmlHeaders;
     }
-
+    
+    /* verb calls */
     public function account() {
-        if(empty($this->verb)){
-            throw new \Exception('method_unsupported');
-        }
-
         $person = new BaseModel();
 
         switch($this->verb){
             case 'login':
-                $person = Person::login($this->request, $this->db, $this->header);
+                $person = Person::login(new Person($this->request), $this->db);
                 break;
             case 'logout':
-                $person = Person::logout($this->db, $this->header);
+                //$person = Person::logout($this->db, $this->header);
                 break;
         }
         if ($person == null) {
             throw new \Exception('user_unknown');
         }
-        $this->person = $person;
 
+        $this->person = $person;
         return $person->toArray();
     }
 
