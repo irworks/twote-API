@@ -96,7 +96,6 @@ abstract class API
             case 'POST':
                 // $this->request = $this->_cleanInputs($_POST);
                 $this->request = $this->_cleanInputs(json_decode(file_get_contents("php://input"), true));
-                var_dump($this->request);
                 break;
             case 'GET':
                 $this->request = $this->_cleanInputs($_GET);

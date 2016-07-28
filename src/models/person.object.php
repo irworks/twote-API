@@ -19,7 +19,7 @@ require_once 'baseModel.object.php';
 class Person extends BaseModel
 {
     protected $username;
-    private $password;
+    protected $password;
     protected $email;
     protected $language;
     
