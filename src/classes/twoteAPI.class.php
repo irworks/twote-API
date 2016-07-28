@@ -14,8 +14,8 @@
 namespace twoteAPI\Classes;
 
 require_once 'api.class.php';
-require_once '../models/baseModel.object.php';
-require_once '../models/person.object.php';
+require_once __DIR__ . '../models/baseModel.object.php';
+require_once __DIR__ . '../models/person.object.php';
 
 use twoteAPI\Models\BaseModel;
 use twoteAPI\Models\Person;
