@@ -10,6 +10,7 @@
  * File: v2/index.php
  * Depends: config
  */
+require_once 'config.php';
 
 require_once 'src/classes/twoteAPI.class.php';
 require_once 'src/classes/db.class.php';
