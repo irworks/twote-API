@@ -114,11 +114,30 @@ class Twote extends BaseModel
 
     /**
      * Deletes a twote from the database.
-     * @param Twote $twote
+     * @param $twote_id
+     * @param Person $person
      * @param DB $db
+     * @return object|\stdClass
+     * @throws \Exception
      */
-    public static function delete(Twote $twote, DB $db) {
+    public static function delete($twote_id, Person $person, DB $db) {
+        $query = "
+                DELETE
+                    FROM twotes
+                WHERE twote_id = " . $db->cl($twote_id) . "
+                    AND
+                id_user  = " . $db->cl($person->getUserId());
 
+        $result = $db->query($query);
+        if($result) {
+            if($db->affected_rows <= 0) {
+                throw new \Exception('error.twote.delete_not_authorized', 2007);
+            }else{
+                return new Twote();
+            }
+        }else{
+            throw new \Exception('error.twote.not_found', 2003);
+        }
     }
 
     private static function getNewTwoteID(DB $db){
