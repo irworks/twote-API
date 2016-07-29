@@ -4,6 +4,8 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 
 ### Documentation:
 
+**Important:** This API expects all HTTP Body data as *JSON Strings!*
+
 `/account` - Endoint:
 - `/login` _POST_ of a **PersonModel** with `{"username":"test", "password":"test"}`
 - `/save` _POST_ of a **PersonModel** with `{"user_id":1, "email":"test@domain.tld","language":"en"}`
