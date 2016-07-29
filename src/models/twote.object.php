@@ -64,9 +64,21 @@ class Twote extends BaseModel
      * Selects a twote from the database.
      * @param $twote_id
      * @param DB $db
+     * @return object|\stdClass
+     * @throws \Exception
      */
     public static function show($twote_id, DB $db) {
+        $query = "
+                SELECT twote_id, content, dateTime, id_user
+                    FROM twotes
+                WHERE twote_id = " . $db->cl($twote_id);
 
+        $result = $db->query($query);
+        if($result && $dbTwote = $result->fetch_object(get_class())) {
+            return $dbTwote;
+        }else{
+            throw new \Exception('error.twote.not_found', 2003);
+        }
     }
 
     /**
