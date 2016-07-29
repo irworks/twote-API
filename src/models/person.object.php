@@ -79,7 +79,7 @@ class Person extends BaseModel
         return $baseModel;
     }
 
-    public static function show(DB $db, $userID = 0) {
+    public static function show($userID = 0, DB $db) {
         $query = "
             SELECT user_id, username
 			  FROM users
