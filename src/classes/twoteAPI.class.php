@@ -43,6 +43,9 @@ class TwoteAPI extends API
             case 'logout':
                 //$person = Person::logout($this->db, $this->header);
                 break;
+            case 'test':
+                var_dump($_SESSION[SESSION_KEY]);
+                break;
         }
 
         $this->person = $person;
