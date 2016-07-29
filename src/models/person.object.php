@@ -47,8 +47,7 @@ class Person extends BaseModel
                     ini_set('session.gc_maxlifetime', 2678400);
 
                     session_regenerate_id();
-                    $_SESSION['sess_user_id'] = $userData['user_id'];
-                    $_SESSION['sess_username'] = $userData['username'];
+                    $_SESSION[SESSION_KEY] = $dbPerson;
                     session_write_close();
 
                     return $dbPerson;
@@ -103,6 +102,5 @@ class Person extends BaseModel
     public function isActivated() {
         return $this->activated;
     }
-
 
 }

@@ -29,4 +29,5 @@ define('MYSQL_DB',       '?????????');
 
 /* API Settings */
 define('DEFAULT_LANG', 'en');
+define('SESSION_KEY',  'sess_person');
 ?>

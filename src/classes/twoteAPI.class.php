@@ -45,10 +45,6 @@ class TwoteAPI extends API
                 break;
         }
 
-        if ($person == null) {
-            throw new \Exception('user_unknown');
-        }
-
         $this->person = $person;
         return $person->toArray();
     }
