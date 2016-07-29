@@ -18,7 +18,7 @@ require_once 'baseModel.object.php';
 
 class Twote extends BaseModel
 {
-    protected $id;
+    protected $twote_id;
     protected $content;
     protected $url;
 
