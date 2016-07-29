@@ -42,22 +42,27 @@ class TwoteAPI extends API
     public function account() {
         $person = new BaseModel();
 
-        switch($this->verb){
-            case 'login':
-                $person = Person::login(new Person($this->request), $this->db);
-                break;
-            case 'show':
+        switch ($this->method) {
+            case 'GET':
                 $person = Person::show(new Person($_SESSION[SESSION_KEY]), $this->db);
                 break;
-            case 'save':
-                $person = Person::save(new Person($this->request), $this->db);
-                break;
-            case 'logout':
-                $person = Person::logout();
-                break;
-            default:
-                $person->setCode(404);
-                $person->setMessage('error.person.unknown_verb');
+            
+            case 'POST':
+                switch($this->verb){
+                    case 'login':
+                        $person = Person::login(new Person($this->request), $this->db);
+                        break;
+                    case 'save':
+                        $person = Person::save(new Person($this->request), $this->db);
+                        break;
+                    case 'logout':
+                        $person = Person::logout();
+                        break;
+                    default:
+                        $person->setCode(404);
+                        $person->setMessage('error.person.unknown_verb');
+                        break;
+                }
                 break;
         }
 
