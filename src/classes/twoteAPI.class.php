@@ -16,9 +16,11 @@ namespace twoteAPI\Classes;
 require_once 'api.class.php';
 require_once __DIR__ . '/../models/baseModel.object.php';
 require_once __DIR__ . '/../models/person.object.php';
+require_once __DIR__ . '/../models/twote.object.php';
 
 use twoteAPI\Models\BaseModel;
 use twoteAPI\Models\Person;
+use twoteAPI\Models\Twote;
 
 class TwoteAPI extends API
 {
@@ -61,6 +63,31 @@ class TwoteAPI extends API
 
         $this->person = $person;
         return $person->toArray();
+    }
+
+    /**
+     * /twote endpoint
+     * @return array
+     */
+    public function twote() {
+        $twote = new BaseModel();
+        
+        switch ($this->method) {
+            case 'GET':
+                $twote = Twote::show($this->verb, $this->db);
+                break;
+            case 'POST':
+                $twote = Twote::save(new Twote($this->request), $this->db);
+                break;
+            case 'PUT':
+                $twote = Twote::update($this->verb, new Twote($this->file), $this->db);
+                break;
+            case 'DELETE':
+                $twote = Twote::delete($this->verb, $this->db);
+                break;
+        }
+        
+        return $twote->toArray();
     }
 
 }

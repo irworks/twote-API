@@ -33,10 +33,20 @@ class Twote extends BaseModel
 
     /**
      * Updates a twote in the database.
+     * @param $twote_id
      * @param Twote $twote
      * @param DB $db
      */
-    public static function update(Twote $twote, DB $db) {
+    public static function update($twote_id, Twote $twote, DB $db) {
+
+    }
+
+    /**
+     * Selects a twote from the database.
+     * @param $twote_id
+     * @param DB $db
+     */
+    public static function show($twote_id, DB $db) {
 
     }
 
@@ -48,4 +58,27 @@ class Twote extends BaseModel
     public static function delete(Twote $twote, DB $db) {
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTwoteId() {
+        return $this->twote_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent() {
+        return $this->content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl() {
+        return $this->url;
+    }
+    
+    
 }
