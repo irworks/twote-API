@@ -1,8 +1,8 @@
-#twote API v2
+# twote API v2
 
 This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.studio).
 
-###Documentation:
+### Documentation:
 
 `/account` - Endoint:
 - `/login` _POST_ of a **PersonModel** with `{"username":"test", "password":"test"}`
