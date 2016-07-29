@@ -54,7 +54,7 @@ class Person extends BaseModel
                     ini_set('session.gc_maxlifetime', 2678400);
 
                     session_regenerate_id();
-                    $_SESSION[SESSION_KEY] = $dbPerson;
+                    $_SESSION[SESSION_KEY] = $dbPerson->toArray();
                     session_write_close();
 
                     return $dbPerson;
@@ -79,14 +79,14 @@ class Person extends BaseModel
         return $baseModel;
     }
 
-    public static function show($userID = 0, DB $db) {
+    public static function show(Person $person, DB $db) {
         $query = "
             SELECT user_id, username
 			  FROM users
-			WHERE user_id = " . $db->cl($userID) . " AND activated = 1";
+			WHERE user_id = " . $db->cl($person->getUserId()) . " AND activated = 1";
 
         $result = $db->query($query);
-        if($userID > 0 && $result && $dbPerson = $result->fetch_object(get_class())) {
+        if($person->getUserId() > 0 && $result && $dbPerson = $result->fetch_object(get_class())) {
             return $dbPerson;
         } else {
             throw new \Exception('error.person.not_found', 1003);

@@ -48,7 +48,7 @@ class TwoteAPI extends API
                 $person = Person::logout();
                 break;
             case 'show':
-                $person = Person::show($_SESSION[SESSION_KEY]->getUserId(), $this->db);
+                $person = Person::show(new Person($_SESSION[SESSION_KEY]), $this->db);
                 break;
         }
 
