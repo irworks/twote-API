@@ -81,7 +81,7 @@ class Person extends BaseModel
 
     public static function show(Person $person, DB $db) {
         $query = "
-            SELECT user_id, username
+            SELECT user_id, username, email, language
 			  FROM users
 			WHERE user_id = " . $db->cl($person->getUserId()) . " AND activated = 1";
 
