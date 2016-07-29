@@ -41,4 +41,34 @@ class BaseModel
     public function toArray() {
         return get_object_vars($this);
     }
+
+    /**
+     * @return int
+     */
+    public function getCode() {
+        return $this->code;
+    }
+
+    /**
+     * @param int $code
+     */
+    public function setCode($code) {
+        $this->code = $code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessage() {
+        return $this->message;
+    }
+
+    /**
+     * @param mixed $message
+     */
+    public function setMessage($message) {
+        $this->message = $message;
+    }
+
+    
 }
