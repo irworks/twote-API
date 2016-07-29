@@ -46,14 +46,15 @@ class TwoteAPI extends API
             case 'GET':
                 $person = Person::show(new Person($_SESSION[SESSION_KEY]), $this->db);
                 break;
+
+            case 'PUT':
+                $person = Person::save(new Person($this->file), $this->db);
+                break;
             
             case 'POST':
                 switch($this->verb){
                     case 'login':
                         $person = Person::login(new Person($this->request), $this->db);
-                        break;
-                    case 'save':
-                        $person = Person::save(new Person($this->request), $this->db);
                         break;
                     case 'logout':
                         $person = Person::logout();
