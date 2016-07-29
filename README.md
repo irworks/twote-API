@@ -10,6 +10,7 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 - `/show` _GET_
 - `/logout` _POST_
 
+  
 `/twote` - Endoint:
 - `/save` _POST_ of a **TwoteModel** with `{"content":"This is a very awesome twote!"}`
 - `/update` _POST_ of a **TwoteModel** with `{"twote_id":1, "content":"This is a even better twote!"}`
