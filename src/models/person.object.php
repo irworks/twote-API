@@ -166,4 +166,13 @@ class Person extends BaseModel
         return $this->user_id;
     }
 
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id) {
+        $this->user_id = $user_id;
+    }
+
+    
+
 }

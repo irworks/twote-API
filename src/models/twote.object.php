@@ -31,8 +31,9 @@ class Twote extends BaseModel
      */
     public static function save(Twote $twote, DB $db) {
         $person = new Person($_SESSION[SESSION_KEY]);
-
-        var_dump($person);
+        if(empty($person->getUserId())) {
+            $person->setUserId(0);
+        }
 
         $query = "
                 INSERT INTO twotes
