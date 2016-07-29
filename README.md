@@ -15,11 +15,11 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 
 `/twote` - Endoint:
 - `/` _POST_ of a new **TwoteModel** with `{"content":"This is a very awesome twote!"}`
-- `/twote_id` _PUT_ of a **TwoteModel** with `{"twote_id":1, "content":"This is a even better twote!"}`
+- `/twote_id` _PUT_ of a **TwoteModel** with `{"twote_id":1, "content":"This is an even better twote!"}`
 - `/twote_id` _DELETE_ of a **TwoteModel** with `{"twote_id":1}`
 - `/twote_id` _GET_ of a **TwoteModel** with `{"twote_id":1}`
 
 ### Deployment:
 
-- `master` - push to this branch => rollout to [Live Server](https://t.whitewhale.studio)
-- `test` - push to this branch => [Beta Server](https://twote-beta.irwks.net)
+- `master` - push to this branch => auto-deployment to [Live Server](https://t.whitewhale.studio)
+- `test` - push to this branch => auto-deployment to [Beta Server](https://twote-beta.irwks.net)
