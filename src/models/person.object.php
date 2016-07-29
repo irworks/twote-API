@@ -69,6 +69,29 @@ class Person extends BaseModel
     }
 
     /**
+     * @param Person $person
+     * @param DB $db
+     * @return null|object|\stdClass
+     * @throws \Exception
+     */
+    public static function save(Person $person, DB $db) {
+        $dbPerson = null;
+
+        $query = "
+            UPDATE users SET 
+              email    = " . $db->cl($person->getEmail()) . ",
+              language = " . $db->cl($person->getLanguage()) . "
+            WHERE user_id = " . $db->cl($person->getUserId());
+
+        $result = $db->query($query);
+        if($result) {
+            return self::show($person, $db);
+        } else {
+            throw new \Exception('error.person.update_failed', 1004);
+        }
+    }
+
+    /**
      * logout a user - destroys its session
      */
     public static function logout() {
