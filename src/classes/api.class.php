@@ -112,11 +112,6 @@ abstract class API
 
     public function processAPI() {
         if (method_exists($this, $this->endpoint)) {
-
-            if(empty($this->verb)){
-                return $this->_response("No verb.", 404);
-            }
-
             /* requesting to the function */
             return $this->_response($this->{$this->endpoint}($this->args));
         }
