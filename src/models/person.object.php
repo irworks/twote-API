@@ -18,6 +18,7 @@ require_once 'baseModel.object.php';
 
 class Person extends BaseModel
 {
+    protected $user_id;
     protected $username;
     protected $password;
     protected $email;
@@ -26,6 +27,12 @@ class Person extends BaseModel
     private $salt;
     private $activated;
 
+    /**
+     * @param Person $person
+     * @param DB $db
+     * @return null|object|\stdClass
+     * @throws \Exception
+     */
     public static function login(Person $person, DB $db) {
 
         $dbPerson = null;
@@ -59,6 +66,10 @@ class Person extends BaseModel
          } else {
             throw new \Exception('error.person.not_found: ' . $query, 1003);
         }
+    }
+    
+    public static function logout() {
+        session_destroy();
     }
 
     /**
