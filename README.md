@@ -10,7 +10,7 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 - `/show` _GET_
 - `/logout` _POST_
 
-### Depolyment
+### Deployment:
 
 - `master` - push to this branch => rollout to [Live Server](https://t.whitewhale.studio)
 - `test` - push to this branch => [Beta Server](https://twote-beta.irwks.net)
