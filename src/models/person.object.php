@@ -6,9 +6,9 @@
  */
 
 /**
- * Module: [INSERT]
+ * Module: DB-Models
  * File: v2/person.object.php
- * Depends: [NONE]
+ * Depends: BaseModel
  */
 
 namespace twoteAPI\Models;
