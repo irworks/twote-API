@@ -76,7 +76,7 @@ abstract class API
 
         $this->args = explode('/', rtrim($request, '/'));
         $this->endpoint = array_shift($this->args);
-        if (array_key_exists(0, $this->args) && !is_numeric($this->args[0])) {
+        if (array_key_exists(0, $this->args)) {
             $this->verb = array_shift($this->args);
         }
 
