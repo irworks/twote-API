@@ -48,7 +48,7 @@ class TwoteAPI extends API
                 break;
 
             case 'PUT':
-                $person = Person::save(new Person($this->file), $this->db);
+                $person = Person::save($this->verb, new Person($this->file), $this->db);
                 break;
             
             case 'POST':

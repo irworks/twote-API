@@ -69,19 +69,25 @@ class Person extends BaseModel
     }
 
     /**
+     * @param $personID
      * @param Person $person
      * @param DB $db
      * @return null|object|\stdClass
      * @throws \Exception
      */
-    public static function save(Person $person, DB $db) {
+    public static function save($personID, Person $person, DB $db) {
         $dbPerson = null;
+
+        $currentPerson = new Person($_SESSION[SESSION_KEY]);
+        if($currentPerson->getUserId() <= 0 || $currentPerson->getUserId() != $personID) {
+            throw new \Exception('error.person.update_not_authorized', 1005);
+        }
 
         $query = "
             UPDATE users SET 
               email    = " . $db->cl($person->getEmail()) . ",
               language = " . $db->cl($person->getLanguage()) . "
-            WHERE user_id = " . $db->cl($person->getUserId());
+            WHERE user_id = " . $db->cl($personID);
 
         $result = $db->query($query);
         if($result) {
