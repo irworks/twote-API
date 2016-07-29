@@ -26,9 +26,28 @@ class Twote extends BaseModel
      * Saves a new twote to the database.
      * @param Twote $twote
      * @param DB $db
+     * @return Twote
+     * @throws \Exception
      */
     public static function save(Twote $twote, DB $db) {
+        $person = new Person($_SESSION[SESSION_KEY]);
 
+        $query = "
+                INSERT INTO twotes
+                  (twote_id, content, dateTime, id_user)
+                VALUES
+                 (" . $db->cl($twote_id = self::getNewTwoteID($db)) . "," . $db->cl($twote->getContent()) . ", NOW(), " . $person->getUserId() . ")";
+
+        if($db->query($query)) {
+            $newTwote = new Twote();
+            $newTwote->setTwoteId($twote_id);
+            $newTwote->setContent($twote->getContent());
+            $newTwote->setUrl(BASE_URL . $twote_id);
+
+            return $newTwote;
+        }else{
+            throw new \Exception('error.twote.save_failed', 2004);
+        }
     }
 
     /**
@@ -59,6 +78,24 @@ class Twote extends BaseModel
 
     }
 
+    private static function getNewTwoteID(DB $db){
+        $idIsAvailable = false;
+
+        while(!$idIsAvailable){
+            $id = mt_rand(1000000000, 9999999999);
+            $idIsAvailable = false;
+
+            $query = "SELECT twote_id FROM twotes WHERE twote_id = " . $db->cl($id);
+            $result = $db->query($query);
+
+            if($result && $db->affected_rows == 0){
+                return $id;
+            }elseif (!$result) {
+                return -1;
+            }
+        }
+    }
+
     /**
      * @return mixed
      */
@@ -79,6 +116,28 @@ class Twote extends BaseModel
     public function getUrl() {
         return $this->url;
     }
-    
+
+    /**
+     * @param mixed $twote_id
+     */
+    public function setTwoteId($twote_id) {
+        $this->twote_id = $twote_id;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content) {
+        $this->content = $content;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url) {
+        $this->url = $url;
+    }
+
+
     
 }
