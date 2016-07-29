@@ -77,7 +77,7 @@ class Twote extends BaseModel
         if($result && $dbTwote = $result->fetch_object(get_class())) {
             return $dbTwote;
         }else{
-            throw new \Exception('error.twote.not_found', 2003);
+            throw new \Exception('error.twote.not_found: ' . $query, 2003);
         }
     }
 
