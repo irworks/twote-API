@@ -25,12 +25,13 @@ class Twote extends BaseModel
     /**
      * Saves a new twote to the database.
      * @param Twote $twote
+     * @param Person $person
      * @param DB $db
      * @return Twote
      * @throws \Exception
      */
-    public static function save(Twote $twote, DB $db) {
-        $person = new Person($_SESSION[SESSION_KEY]);
+    public static function save(Twote $twote, Person $person, DB $db) {
+
         if(empty($person->getUserId())) {
             $person->setUserId(0);
         }
@@ -57,9 +58,36 @@ class Twote extends BaseModel
      * Updates a twote in the database.
      * @param $twote_id
      * @param Twote $twote
+     * @param Person $person
      * @param DB $db
+     * @return Twote
+     * @throws \Exception
      */
-    public static function update($twote_id, Twote $twote, DB $db) {
+    public static function update($twote_id, Twote $twote, Person $person, DB $db) {
+
+        if(empty($person->getUserId())) {
+            throw new \Exception('error.twote.update_not_authorized', 2005);
+        }
+
+        $query = "
+                UPDATE twotes
+                  SET
+                content = " . $db->cl($twote->getContent()) . "
+                  WHERE 
+                twote_id = " . $db->cl($twote_id) . "
+                  AND
+                id_user  = " . $db->cl($person->getUserId());
+
+        if($db->query($query)) {
+            $newTwote = new Twote();
+            $newTwote->setTwoteId($twote_id);
+            $newTwote->setContent($twote->getContent());
+            $newTwote->setUrl(BASE_URL . $twote_id);
+
+            return $newTwote;
+        }else{
+            throw new \Exception('error.twote.update_failed', 2006);
+        }
 
     }
 

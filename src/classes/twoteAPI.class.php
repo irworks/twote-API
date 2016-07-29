@@ -70,20 +70,21 @@ class TwoteAPI extends API
      * @return array
      */
     public function twote() {
-        $twote = new BaseModel();
+        $twote  = new BaseModel();
+        $person = new Person($_SESSION[SESSION_KEY]);
         
         switch ($this->method) {
             case 'GET':
                 $twote = Twote::show($this->verb, $this->db);
                 break;
             case 'POST':
-                $twote = Twote::save(new Twote($this->request), $this->db);
+                $twote = Twote::save(new Twote($this->request), $person, $this->db);
                 break;
             case 'PUT':
-                $twote = Twote::update($this->verb, new Twote($this->file), $this->db);
+                $twote = Twote::update($this->verb, new Twote($this->file), $person, $this->db);
                 break;
             case 'DELETE':
-                $twote = Twote::delete($this->verb, $this->db);
+                $twote = Twote::delete($this->verb, $person, $this->db);
                 break;
         }
         
