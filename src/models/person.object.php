@@ -64,12 +64,34 @@ class Person extends BaseModel
             }
 
          } else {
-            throw new \Exception('error.person.not_found: ' . $query, 1003);
+            throw new \Exception('error.person.not_found', 1003);
         }
     }
-    
+
+    /**
+     * logout a user - destroys its session
+     */
     public static function logout() {
         session_destroy();
+
+        $baseModel = new BaseModel();
+        $baseModel->message = 'success.person_logout';
+        return $baseModel;
+    }
+
+    public static function show(DB $db, $userID = 0) {
+        $query = "
+            SELECT user_id, username
+			  FROM users
+			WHERE user_id = " . $db->cl($userID) . " AND activated = 1";
+
+        $result = $db->query($query);
+        if($userID > 0 && $result && $dbPerson = $result->fetch_object(get_class())) {
+            return $dbPerson;
+        } else {
+            throw new \Exception('error.person.not_found', 1003);
+        }
+
     }
 
     /**
@@ -112,6 +134,13 @@ class Person extends BaseModel
      */
     public function isActivated() {
         return $this->activated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId() {
+        return $this->user_id;
     }
 
 }

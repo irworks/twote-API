@@ -31,8 +31,12 @@ class TwoteAPI extends API
         $this->db       = $db;
         $this->header   = $htmlHeaders;
     }
-    
-    /* verb calls */
+
+    /**
+     * /account endpoint - calls to /account/verb
+     * @return array
+     * @throws \Exception
+     */
     public function account() {
         $person = new BaseModel();
 
@@ -43,8 +47,8 @@ class TwoteAPI extends API
             case 'logout':
                 $person = Person::logout();
                 break;
-            case 'test':
-                var_dump($_SESSION[SESSION_KEY]);
+            case 'show':
+                $person = Person::show($_SESSION[SESSION_KEY]->getUserId());
                 break;
         }
 
