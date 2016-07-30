@@ -133,6 +133,10 @@ class TwoteAPI extends API
             return;
         }
 
+        if(!file_exists(CACHE_DIR)) {
+            mkdir(CACHE_DIR);
+        }
+
         $output = "<?php" . PHP_EOL;
             $output .= "\$LANG_ARRAY = array(" . PHP_EOL;
         
