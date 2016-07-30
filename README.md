@@ -12,6 +12,8 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 - `Appversion` => {major_version (build_num)} ex. 1.3 (42)
 - `Apiversion` => {2.0}
 - `Bundleidentifier` => {tld.domain.appname} ex. (cloud.kitchenapps.twote-for-taoster)
+- `Timestamp` => The current UNIX timestamp ex. 1469914231
+- `Verification` => md5( `Timestamp` + md5(`HTTP Request body`) ) ex. md5(1469914231 + md5(`{"username":"test", "password":"test"}`)) => md5(1469914231d22b56789a7508ee88e7fc452976627a) => `eb03b875269a21c3d0cabd0b8539f97c`
 
 ### Endpoints:
 
