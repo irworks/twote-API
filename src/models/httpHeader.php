@@ -19,5 +19,5 @@ class HTTPHeader extends BaseModel
     protected $Devicetype;
     protected $Appversion;
     protected $Apiversion;
-    protected $BundleIdentifier;
+    protected $Bundleidentifier;
 }
