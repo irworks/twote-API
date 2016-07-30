@@ -4,7 +4,7 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 
 ### Documentation:
 
-**Important:** This API expects all HTTP Body data as *JSON Strings!*  
+**Important:** This API expects all HTTP Body data as *JSON Strings!*
 **Always** send the following *HTTP Headers*. (Yes, they are named so ugly because HTTP Headers should be named like this. :( )
 
   `headers`:
@@ -12,6 +12,8 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 - `Appversion` => {major_version (build_num)} ex. 1.3 (42)
 - `Apiversion` => {2.0}
 - `Bundleidentifier` => {tld.domain.appname} ex. (cloud.kitchenapps.twote-for-taoster)
+
+### Endpoints:
 
 `/account` - Endoint:
 - `/login` _POST_ of a **PersonModel** with `{"username":"test", "password":"test"}`
