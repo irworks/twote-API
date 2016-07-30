@@ -20,28 +20,25 @@ require_once __DIR__ . '/../models/twote.object.php';
 require_once __DIR__ . '/../models/allTwotes.object.php';
 require_once __DIR__ . '/../models/httpHeader.php';
 
+require_once __DIR__ . '/language.class.php';
+
 use twoteAPI\Models\BaseModel;
 use twoteAPI\Models\Person;
 use twoteAPI\Models\Twote;
 use twoteAPI\Models\AllTwotes;
 
-use twoteAPI\Models\HTTPHeader;
-
 class TwoteAPI extends API
 {
     private $db;
     private $person;
-    private $lang;
 
     public function __construct($request, $htmlHeaders, DB $db) {
         parent::__construct($request);
 
         $this->db       = $db;
-        $this->header   = new HTTPHeader($htmlHeaders);
-        $this->lang     = $this->header->getLanguage();
+        $this->header   = $htmlHeaders;
         
         $this->verifyRequest();
-        $this->generateLanguageCache();
     }
     
     protected function verifyRequest() {
@@ -126,34 +123,6 @@ class TwoteAPI extends API
         }
         
         return $twote->toArray();
-    }
-
-    private function generateLanguageCache() {
-        if(file_exists(LANG_CACHE_FILE)) {
-            return;
-        }
-
-        if(!file_exists(CACHE_DIR)) {
-            mkdir(CACHE_DIR);
-        }
-
-        $output = "<?php" . PHP_EOL;
-            $output .= "\$LANG_ARRAY = array(" . PHP_EOL;
-        
-        //TODO: make this more dynamic
-        $query = "SELECT lang_key, value_en, value_de FROM language";
-        $result = $this->db->query($query);
-
-        while ($result && $row = $result->fetch_assoc()) {
-            $output .= "'" . $row['lang_key'] . "' => array(" . PHP_EOL;
-                $output .= "'en' => '" . $row['value_en'] . "'," . PHP_EOL;
-                $output .= "'de' => '" . $row['value_de'] . "'" . PHP_EOL;
-            $output .= '), ' . PHP_EOL . PHP_EOL;
-        }
-
-            $output .= ");" . PHP_EOL;
-        $output .= PHP_EOL . '?>';
-        file_put_contents(LANG_CACHE_FILE, $output);
     }
 
 }
