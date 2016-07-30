@@ -19,6 +19,8 @@ class Language
     private $db;
     private $lang;
 
+    private $langCache;
+
     function __construct(DB $db, $lang = DEFAULT_LANG) {
         $this->db   = $db;
         $this->lang = $lang;
@@ -33,9 +35,7 @@ class Language
      * @return string
      */
     public function get($key = '', $lang = null) {
-        global $LANG_ARRAY;
-
-        $LANG_ARRAY = isset($LANG_ARRAY) ? $LANG_ARRAY : array();
+        $LANG_ARRAY = isset($this->langCache->LANG_ARRAY) ? $this->langCache->LANG_ARRAY : array();
         $lang       = isset($lang)       ? $lang       : $this->lang;
 
         var_dump($LANG_ARRAY);
@@ -53,6 +53,7 @@ class Language
     private function generateLanguageCache() {
         if(file_exists(LANG_CACHE_FILE)) {
             require_once LANG_CACHE_FILE;
+            $this->langCache = new LanguageCache();
             return;
         }
 
@@ -61,7 +62,10 @@ class Language
         }
 
         $output = "<?php" . PHP_EOL;
-        $output .= "\$LANG_ARRAY = array(" . PHP_EOL;
+        $output .= 'namespace twoteAPI\Classes;' . PHP_EOL;
+        $output .= 'class LanguageCache {' . PHP_EOL;
+
+        $output .= "public static \$LANG_ARRAY = array(" . PHP_EOL;
 
         //TODO: make this more dynamic
         $query = "SELECT lang_key, value_en, value_de FROM language";
@@ -75,9 +79,12 @@ class Language
         }
 
         $output .= ");" . PHP_EOL;
+        $output .= "}" . PHP_EOL;
         $output .= PHP_EOL . '?>';
         file_put_contents(LANG_CACHE_FILE, $output);
+
         require_once LANG_CACHE_FILE;
+        $this->langCache = new LanguageCache();
     }
 
 }
