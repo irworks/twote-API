@@ -33,7 +33,7 @@ class TwoteAPI extends API
     private $person;
     private $lang;
 
-    public function __construct($request, $htmlHeaders, $db) {
+    public function __construct($request, $htmlHeaders, DB $db) {
         parent::__construct($request);
 
         $this->db       = $db;
@@ -144,7 +144,7 @@ class TwoteAPI extends API
         $query = "SELECT lang_key, value_en, value_de FROM language";
         $result = $this->db->query($query);
 
-        while ($result && $row = $result->fetch_assoc($result)) {
+        while ($result && $row = $result->fetch_assoc()) {
             $output .= "'" . $row['key'] . "' => array(" . PHP_EOL;
                 $output .= "'en' => '" . $row['value_en'] . "'," . PHP_EOL;
                 $output .= "'de' => '" . $row['value_de'] . PHP_EOL;
