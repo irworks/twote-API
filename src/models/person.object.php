@@ -21,6 +21,7 @@ class Person extends BaseModel
     protected $user_id;
     protected $username;
     protected $password;
+    protected $newPassword;
     protected $email;
     protected $language;
     
@@ -48,7 +49,7 @@ class Person extends BaseModel
             if(!$dbPerson->isActivated()) {
                 throw new \Exception('error.person.not_activated', 1001);
             }else{
-                $hash = hash('sha256', $dbPerson->getSalt() . hash('sha256', $person->getPassword()));
+                $hash = self::getPasswordHash($person->getPassword(), $dbPerson->getSalt());
 
                 if($hash === $dbPerson->getPassword()) {
                     ini_set('session.gc_maxlifetime', 2678400);
@@ -86,8 +87,13 @@ class Person extends BaseModel
         $query = "
             UPDATE users SET 
               email    = " . $db->cl($person->getEmail()) . ",
-              language = " . $db->cl($person->getLanguage()) . "
-            WHERE user_id = " . $db->cl($personID);
+              language = " . $db->cl($person->getLanguage());
+
+        if(!empty($person->getNewPassword()) && !empty($person->getPassword()) && $currentPerson->getPassword() === self::getPasswordHash($person->getPassword(), self::getSaltForUserID($personID, $db))) {
+            $query .= ', password = ' . $db->cl(self::getPasswordHash($person->newPassword, self::getSaltForUserID($personID, $db)));
+        }
+
+        $query .= " WHERE user_id = " . $db->cl($personID);
 
         $result = $db->query($query);
         if($result) {
@@ -121,6 +127,24 @@ class Person extends BaseModel
             throw new \Exception('error.person.not_found', 1003);
         }
 
+    }
+
+    private static function getPasswordHash($password = '', $salt = '') {
+        return hash('sha256', $salt . hash('sha256', $password));
+    }
+
+    private static function getSaltForUserID($user_id, DB $db) {
+        $query = "
+            SELECT salt
+			  FROM users
+			WHERE user_id = " . $db->cl($user_id);
+        $result = $db->query($query);
+
+        if($result) {
+            return $result->fetch_row()['salt'];
+        }
+
+        return false;
     }
 
     /**
@@ -177,6 +201,13 @@ class Person extends BaseModel
      */
     public function setUserId($user_id) {
         $this->user_id = $user_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewPassword() {
+        return $this->newPassword;
     }
 
     
