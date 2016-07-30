@@ -18,6 +18,7 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 - `/*twote_id*` _PUT_ of a **TwoteModel** with `{"content":"This is an even better twote!"}`
 - `/*twote_id*` _DELETE_ of a **TwoteModel**
 - `/*twote_id*` _GET_ of a **TwoteModel**
+- `/all` _GET_ of a a array of **TwoteModels**
 
 ### Deployment:
 

@@ -17,10 +17,12 @@ require_once 'api.class.php';
 require_once __DIR__ . '/../models/baseModel.object.php';
 require_once __DIR__ . '/../models/person.object.php';
 require_once __DIR__ . '/../models/twote.object.php';
+require_once __DIR__ . '/../models/allTwotes.object.php';
 
 use twoteAPI\Models\BaseModel;
 use twoteAPI\Models\Person;
 use twoteAPI\Models\Twote;
+use twoteAPI\Models\AllTwotes;
 
 class TwoteAPI extends API
 {
@@ -81,7 +83,14 @@ class TwoteAPI extends API
         
         switch ($this->method) {
             case 'GET':
-                $twote = Twote::show($this->verb, $this->db);
+                switch ($this->verb) {
+                    case 'all':
+                        $twote = AllTwotes::showAllForUser($person->getUserId(), $this->db);
+                        break;
+                    default:
+                        $twote = Twote::show($this->verb, $this->db);
+                        break;
+                }
                 break;
             case 'POST':
                 $twote = Twote::save(new Twote($this->request), $person, $this->db);
