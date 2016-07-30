@@ -32,7 +32,7 @@ $db = new DB(MYSQL_HOST, MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_DB);
 $db->set_charset("utf8");
 
 try {
-    $API       = new TwoteAPI($_REQUEST['request'], $headers, $db, DEFAULT_LANG);
+    $API       = new TwoteAPI($_REQUEST['request'], $headers, $db);
     $apiOutput = $API->processAPI();
 } catch (\Exception $e) {
     $apiOutput = json_encode(array(

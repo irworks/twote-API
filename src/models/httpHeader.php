@@ -22,6 +22,7 @@ class HTTPHeader extends BaseModel
     protected $Bundleidentifier;
     protected $Verification;
     protected $Timestamp;
+    protected $Language = DEFAULT_LANG;
 
     /**
      * @return mixed
@@ -65,5 +66,11 @@ class HTTPHeader extends BaseModel
         return $this->Timestamp;
     }
 
-    
+    /**
+     * @return mixed
+     */
+    public function getLanguage() {
+        return $this->Language;
+    }
+
 }

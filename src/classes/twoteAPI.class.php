@@ -31,14 +31,17 @@ class TwoteAPI extends API
 {
     private $db;
     private $person;
+    private $lang;
 
-    public function __construct($request, $htmlHeaders, $db, $lang) {
+    public function __construct($request, $htmlHeaders, $db) {
         parent::__construct($request);
 
         $this->db       = $db;
         $this->header   = new HTTPHeader($htmlHeaders);
+        $this->lang     = $this->header->getLanguage();
         
         $this->verifyRequest();
+        $this->generateLanguageCache();
     }
     
     protected function verifyRequest() {
@@ -123,6 +126,30 @@ class TwoteAPI extends API
         }
         
         return $twote->toArray();
+    }
+
+    private function generateLanguageCache() {
+        if(file_exists(LANG_CACHE_FILE)) {
+            return;
+        }
+
+        $output = "<?php" . PHP_EOL;
+            $output .= "\$LANG_ARRAY = array(" . PHP_EOL;
+        
+        //TODO: make this more dynamic
+        $query = "SELECT key, value_en, value_de FROM language";
+        $result = $this->db->query($query);
+
+        while ($result && $row = $this->db->fetch_assoc($result)) {
+            $output .= "'" . $row['key'] . "' => array(" . PHP_EOL;
+                $output .= "'en' => '" . $row['value_en'] . "'," . PHP_EOL;
+                $output .= "'de' => '" . $row['value_de'] . PHP_EOL;
+            $output .= '), ';
+        }
+
+            $output .= ");" . PHP_EOL;
+        $output .= PHP_EOL . '?>';
+        file_put_contents(LANG_CACHE_FILE, $output);
     }
 
 }
