@@ -18,11 +18,14 @@ require_once __DIR__ . '/../models/baseModel.object.php';
 require_once __DIR__ . '/../models/person.object.php';
 require_once __DIR__ . '/../models/twote.object.php';
 require_once __DIR__ . '/../models/allTwotes.object.php';
+require_once __DIR__ . '/../models/httpHeader.php';
 
 use twoteAPI\Models\BaseModel;
 use twoteAPI\Models\Person;
 use twoteAPI\Models\Twote;
 use twoteAPI\Models\AllTwotes;
+
+use twoteAPI\Models\HTTPHeader;
 
 class TwoteAPI extends API
 {
@@ -33,7 +36,9 @@ class TwoteAPI extends API
         parent::__construct($request);
 
         $this->db       = $db;
-        $this->header   = $htmlHeaders;
+        $this->header   = new HTTPHeader($htmlHeaders);
+
+        var_dump($this->header);
     }
 
     /**
