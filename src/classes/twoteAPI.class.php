@@ -45,12 +45,12 @@ class TwoteAPI extends API
         $currentTimestamp = time();
         
         if($currentTimestamp - ($this->getHeader()->getTimestamp()) > REQUEST_TIMEOUT) {
-            throw new \Exception('error.general.bad_request', -0401);
+            throw new \Exception('error.general.bad_request', 0401);
         }
 
         if(isset($this->request)) {
             if(md5($currentTimestamp . md5($this->request)) !== $this->getHeader()->getVerification()) {
-                throw new \Exception('error.general.bad_request', -0402);
+                throw new \Exception('error.general.bad_request', 0402);
             }
         }
     } 
