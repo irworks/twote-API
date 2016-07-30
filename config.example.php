@@ -31,5 +31,6 @@ define('MYSQL_DB',       '?????????');
 define('DEFAULT_LANG', 'en');
 define('SESSION_KEY',  'sess_person');
 define('REQUEST_TIMEOUT', 20);
+define('SESSION_LIFETIME', 60 * 60 * 24 * 365);
 define('BASE_URL',     'https://t.?????.tld');
 ?>

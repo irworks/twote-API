@@ -11,14 +11,14 @@
  * Depends: config
  */
 
-session_set_cookie_params(60 * 60 * 24 * 365 * 5);
-session_start();
-
 if(file_exists('config.php')) {
     require_once 'config.php';
 }else{
     throw new \Exception('error.config_php_missing', 0001);
 }
+
+session_set_cookie_params(SESSION_LIFETIME);
+session_start();
 
 require_once 'src/classes/twoteAPI.class.php';
 require_once 'src/classes/db.class.php';
