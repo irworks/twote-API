@@ -19,8 +19,6 @@ class Language
     private $db;
     private $lang;
 
-    private $langCache;
-
     function __construct(DB $db, $lang = DEFAULT_LANG) {
         $this->db   = $db;
         $this->lang = $lang;
@@ -35,10 +33,10 @@ class Language
      * @return string
      */
     public function get($key = '', $lang = null) {
-        $LANG_ARRAY = isset($this->langCache->LANG_ARRAY) ? $this->langCache->LANG_ARRAY : array();
+        $LANG_ARRAY = isset(LanguageCache::LANG_ARRAY) ? LanguageCache::LANG_ARRAY : array();
         $lang       = isset($lang)       ? $lang       : $this->lang;
 
-        var_dump($this->langCache);
+        var_dump($LANG_ARRAY);
 
         if(key_exists($key, $LANG_ARRAY)) {
             return $LANG_ARRAY[$key][$lang];
@@ -53,7 +51,6 @@ class Language
     private function generateLanguageCache() {
         if(file_exists(LANG_CACHE_FILE)) {
             require_once LANG_CACHE_FILE;
-            $this->langCache = new LanguageCache();
             return;
         }
 
@@ -84,7 +81,6 @@ class Language
         file_put_contents(LANG_CACHE_FILE, $output);
 
         require_once LANG_CACHE_FILE;
-        $this->langCache = new LanguageCache();
     }
 
 }
