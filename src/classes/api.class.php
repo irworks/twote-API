@@ -53,6 +53,7 @@ abstract class API
     protected $file = Null;
 
     protected $header;
+    protected $rawInput;
 
     /**
      * Constructor: __construct
@@ -93,16 +94,17 @@ abstract class API
 
         switch($this->method) {
             case 'POST':
-                // $this->request = $this->_cleanInputs($_POST);
-                $this->request = $this->_cleanInputs(json_decode(file_get_contents("php://input"), true));
+                $this->rawInput = file_get_contents("php://input");
+                $this->request  = $this->_cleanInputs(json_decode($this->rawInput));
                 break;
             case 'DELETE':
             case 'GET':
-                $this->request = $this->_cleanInputs($_GET);
+                $this->request  = $this->_cleanInputs($_GET);
                 break;
             case 'PUT':
-                $this->request = $this->_cleanInputs($_GET);
-                $this->file = $this->_cleanInputs(json_decode(file_get_contents("php://input"), true));
+                $this->rawInput = file_get_contents("php://input");
+                $this->request  = $this->_cleanInputs($_GET);
+                $this->file     = $this->_cleanInputs(json_decode($this->rawInput));
                 break;
             default:
                 $this->_response('invalid_method', 405);
