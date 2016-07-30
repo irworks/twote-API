@@ -16,8 +16,8 @@ require_once 'baseModel.object.php';
 
 class HTTPHeader extends BaseModel
 {
-    protected $deviceType;
-    protected $appVersion;
-    protected $apiVersion;
-    protected $bundleIdentifier;
+    protected $Devicetype;
+    protected $Appversion;
+    protected $Apiversion;
+    protected $BundleIdentifier;
 }

@@ -38,7 +38,7 @@ class TwoteAPI extends API
         $this->db       = $db;
         $this->header   = new HTTPHeader($htmlHeaders);
 
-        var_dump($htmlHeaders);
+        var_dump($this->header);
     }
 
     /**
