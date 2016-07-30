@@ -36,8 +36,6 @@ class Language
         $LANG_ARRAY = LanguageCache::$LANG_ARRAY;
         $lang       = isset($lang)       ? $lang       : $this->lang;
 
-        var_dump($LANG_ARRAY);
-
         if(key_exists($key, $LANG_ARRAY)) {
             return $LANG_ARRAY[$key][$lang];
         }else{
