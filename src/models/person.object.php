@@ -21,7 +21,7 @@ class Person extends BaseModel
     protected $user_id;
     protected $username;
     protected $password;
-    protected $newPassword;
+    protected $changePassword;
     protected $email;
     protected $language;
     
@@ -90,7 +90,7 @@ class Person extends BaseModel
               language = " . $db->cl($person->getLanguage());
 
         if(!empty($person->getNewPassword()) && !empty($person->getPassword()) && $currentPerson->getPassword() === self::getPasswordHash($person->getPassword(), self::getSaltForUserID($personID, $db))) {
-            $query .= ', password = ' . $db->cl(self::getPasswordHash($person->newPassword, self::getSaltForUserID($personID, $db)));
+            $query .= ', password = ' . $db->cl(self::getPasswordHash($person->Password, self::getSaltForUserID($personID, $db)));
         }
 
         $query .= " WHERE user_id = " . $db->cl($personID);
@@ -207,7 +207,7 @@ class Person extends BaseModel
      * @return mixed
      */
     public function getNewPassword() {
-        return $this->newPassword;
+        return $this->changePassword;
     }
 
     
