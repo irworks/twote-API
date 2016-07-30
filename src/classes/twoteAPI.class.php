@@ -145,9 +145,9 @@ class TwoteAPI extends API
         $result = $this->db->query($query);
 
         while ($result && $row = $result->fetch_assoc()) {
-            $output .= "'" . $row['key'] . "' => array(" . PHP_EOL;
+            $output .= "'" . $row['lang_key'] . "' => array(" . PHP_EOL;
                 $output .= "'en' => '" . $row['value_en'] . "'," . PHP_EOL;
-                $output .= "'de' => '" . $row['value_de'] . PHP_EOL;
+                $output .= "'de' => '" . $row['value_de'] . "''" . PHP_EOL;
             $output .= '), ';
         }
 
