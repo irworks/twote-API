@@ -33,7 +33,9 @@ class Language
      * @return string
      */
     public function get($key = '', $lang) {
-        $LANG_ARRAY = defined('LANG_ARRAY') ? $LANG_ARRAY : array();
+        global $LANG_ARRAY;
+
+        $LANG_ARRAY = isset($LANG_ARRAY) ? $LANG_ARRAY : array();
         $lang       = isset($lang)       ? $lang       : $this->lang;
         
         if(key_exists($key, $LANG_ARRAY)) {
@@ -57,7 +59,7 @@ class Language
         }
 
         $output = "<?php" . PHP_EOL;
-        $output .= "define('LANG_ARRAY', array(" . PHP_EOL;
+        $output .= "\$LANG_ARRAY = array(" . PHP_EOL;
 
         //TODO: make this more dynamic
         $query = "SELECT lang_key, value_en, value_de FROM language";
@@ -70,11 +72,9 @@ class Language
             $output .= '), ' . PHP_EOL . PHP_EOL;
         }
 
-        $output .= ")" . PHP_EOL;
         $output .= ");" . PHP_EOL;
         $output .= PHP_EOL . '?>';
         file_put_contents(LANG_CACHE_FILE, $output);
-
         require_once LANG_CACHE_FILE;
     }
 
