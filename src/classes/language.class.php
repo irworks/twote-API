@@ -33,10 +33,11 @@ class Language
      * @return string
      */
     public function get($key = '', $lang) {
+        $LANG_ARRAY = defined('LANG_ARRAY') ? $LANG_ARRAY : array();
         $lang       = isset($lang)       ? $lang       : $this->lang;
         
-        if(key_exists($key, LANG_ARRAY)) {
-            return LANG_ARRAY[$key][$lang];
+        if(key_exists($key, $LANG_ARRAY)) {
+            return $LANG_ARRAY[$key][$lang];
         }else{
             return $key;
         }
