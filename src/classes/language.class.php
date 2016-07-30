@@ -32,12 +32,14 @@ class Language
      * @param $lang
      * @return string
      */
-    public function get($key = '', $lang) {
+    public function get($key = '', $lang = null) {
         global $LANG_ARRAY;
 
         $LANG_ARRAY = isset($LANG_ARRAY) ? $LANG_ARRAY : array();
         $lang       = isset($lang)       ? $lang       : $this->lang;
-        
+
+        var_dump($LANG_ARRAY);
+
         if(key_exists($key, $LANG_ARRAY)) {
             return $LANG_ARRAY[$key][$lang];
         }else{
