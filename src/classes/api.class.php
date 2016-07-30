@@ -95,7 +95,7 @@ abstract class API
         switch($this->method) {
             case 'POST':
                 $this->rawInput = file_get_contents("php://input");
-                $this->request  = $this->_cleanInputs(json_decode($this->rawInput));
+                $this->request  = $this->_cleanInputs(json_decode($this->rawInput, true));
                 break;
             case 'DELETE':
             case 'GET':
@@ -104,7 +104,7 @@ abstract class API
             case 'PUT':
                 $this->rawInput = file_get_contents("php://input");
                 $this->request  = $this->_cleanInputs($_GET);
-                $this->file     = $this->_cleanInputs(json_decode($this->rawInput));
+                $this->file     = $this->_cleanInputs(json_decode($this->rawInput, true));
                 break;
             default:
                 $this->_response('invalid_method', 405);

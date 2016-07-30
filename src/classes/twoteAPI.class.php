@@ -32,7 +32,7 @@ class TwoteAPI extends API
     private $db;
     private $person;
 
-    public function __construct($request, $origin, $htmlHeaders, $db, $lang) {
+    public function __construct($request, $htmlHeaders, $db, $lang) {
         parent::__construct($request);
 
         $this->db       = $db;
