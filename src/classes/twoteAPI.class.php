@@ -144,7 +144,7 @@ class TwoteAPI extends API
         $query = "SELECT lang_key, value_en, value_de FROM language";
         $result = $this->db->query($query);
 
-        while ($result && $row = $this->db->fetch_assoc($result)) {
+        while ($result && $row = $result->fetch_assoc($result)) {
             $output .= "'" . $row['key'] . "' => array(" . PHP_EOL;
                 $output .= "'en' => '" . $row['value_en'] . "'," . PHP_EOL;
                 $output .= "'de' => '" . $row['value_de'] . PHP_EOL;
