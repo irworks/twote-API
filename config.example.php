@@ -30,5 +30,6 @@ define('MYSQL_DB',       '?????????');
 /* API Settings */
 define('DEFAULT_LANG', 'en');
 define('SESSION_KEY',  'sess_person');
+define('REQUEST_TIMEOUT', 20);
 define('BASE_URL',     'https://t.?????.tld');
 ?>

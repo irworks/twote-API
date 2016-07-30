@@ -37,7 +37,23 @@ class TwoteAPI extends API
 
         $this->db       = $db;
         $this->header   = new HTTPHeader($htmlHeaders);
+        
+        $this->verifyRequest();
     }
+    
+    protected function verifyRequest() {
+        $currentTimestamp = time();
+        
+        if($currentTimestamp - ($this->getHeader()->getTimestamp()) > REQUEST_TIMEOUT) {
+            throw new \Exception('error.general.bad_request', -0401);
+        }
+
+        if(isset($this->request)) {
+            if(md5($currentTimestamp . md5($this->request)) !== $this->getHeader()->getVerification()) {
+                throw new \Exception('error.general.bad_request', -0402);
+            }
+        }
+    } 
 
     /**
      * /account endpoint - calls to /account/verb

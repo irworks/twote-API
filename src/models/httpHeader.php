@@ -20,4 +20,50 @@ class HTTPHeader extends BaseModel
     protected $Appversion;
     protected $Apiversion;
     protected $Bundleidentifier;
+    protected $Verification;
+    protected $Timestamp;
+
+    /**
+     * @return mixed
+     */
+    public function getDevicetype() {
+        return $this->Devicetype;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAppversion() {
+        return $this->Appversion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiversion() {
+        return $this->Apiversion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBundleidentifier() {
+        return $this->Bundleidentifier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVerification() {
+        return $this->Verification;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTimestamp() {
+        return $this->Timestamp;
+    }
+
+    
 }
