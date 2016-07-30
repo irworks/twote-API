@@ -33,7 +33,7 @@ class Language
      * @return string
      */
     public function get($key = '', $lang = null) {
-        $LANG_ARRAY = isset(LanguageCache::LANG_ARRAY) ? LanguageCache::LANG_ARRAY : array();
+        $LANG_ARRAY = LanguageCache::LANG_ARRAY;
         $lang       = isset($lang)       ? $lang       : $this->lang;
 
         var_dump($LANG_ARRAY);
