@@ -148,7 +148,7 @@ class TwoteAPI extends API
             $output .= "'" . $row['lang_key'] . "' => array(" . PHP_EOL;
                 $output .= "'en' => '" . $row['value_en'] . "'," . PHP_EOL;
                 $output .= "'de' => '" . $row['value_de'] . "'" . PHP_EOL;
-            $output .= '), ';
+            $output .= '), ' . PHP_EOL . PHP_EOL;
         }
 
             $output .= ");" . PHP_EOL;
