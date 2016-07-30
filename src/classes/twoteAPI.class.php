@@ -49,7 +49,7 @@ class TwoteAPI extends API
         }
 
         if(isset($this->request)) {
-            if(md5($currentTimestamp . md5($this->request)) !== $this->getHeader()->getVerification()) {
+            if(md5($this->getHeader()->getTimestamp() . md5($this->request)) !== $this->getHeader()->getVerification()) {
                 throw new \Exception('error.general.bad_request', 9902);
             }
         }
