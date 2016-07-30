@@ -66,7 +66,7 @@ class Twote extends BaseModel
     public static function update($twote_id, Twote $twote, Person $person, DB $db) {
 
         if(empty($person->getUserId())) {
-            throw new \Exception('error.twote.update_not_authorized', 2005);
+            throw new \Exception('error.twote.update_not_authorized', -2005);
         }
 
         $query = "

@@ -11,6 +11,7 @@
  * Depends: config
  */
 
+session_set_cookie_params(60 * 60 * 24 * 365 * 5);
 session_start();
 
 if(file_exists('config.php')) {
