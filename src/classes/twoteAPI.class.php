@@ -65,7 +65,14 @@ class TwoteAPI extends API
 
         switch ($this->method) {
             case 'GET':
-                $person = Person::show(new Person($_SESSION[SESSION_KEY]), $this->db);
+                switch($this->verb){
+                    case 'status':
+                        $person = new Person($_SESSION[SESSION_KEY]);
+                        break;
+                    default:
+                        $person = Person::show(new Person($_SESSION[SESSION_KEY]), $this->db);
+                        break;
+                }
                 break;
 
             case 'PUT':
