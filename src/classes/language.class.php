@@ -75,11 +75,11 @@ class Language
 
             foreach ($row as $key => $value) {
                 if(strpos($key, 'value_') !== false) {
-                    $output .= "        '" . str_replace('value_', '', $key) . "' => '" . $value . "'," . PHP_EOL;
+                    $output .= "            '" . str_replace('value_', '', $key) . "' => '" . $value . "'," . PHP_EOL;
                 }
             }
 
-            $output .= '    ), ' . PHP_EOL . PHP_EOL;
+            $output .= '        ), ' . PHP_EOL . PHP_EOL;
         }
 
         $output .= "    );" . PHP_EOL;
