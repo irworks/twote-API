@@ -72,7 +72,7 @@ class TwoteAPI extends API
 
                         if($person->getUserId() == null) {
                             $person->setCode(9801);
-                            $person->setMessage('session.expired');
+                            $person->setMessage('warning.session_expired');
                         }
 
                         break;
