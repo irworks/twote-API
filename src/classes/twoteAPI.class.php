@@ -69,6 +69,12 @@ class TwoteAPI extends API
                     case 'status':
                         $person = new Person($_SESSION[SESSION_KEY]);
                         $person->setPassword(null);
+
+                        if($person->getUserId() == null) {
+                            $person->setCode(9801);
+                            $person->setMessage('session.expired');
+                        }
+
                         break;
                     default:
                         $person = Person::show(new Person($_SESSION[SESSION_KEY]), $this->db);
