@@ -210,6 +210,13 @@ class Person extends BaseModel
         return $this->changePassword;
     }
 
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password) {
+        $this->password = $password;
+    }
+
     
 
 }

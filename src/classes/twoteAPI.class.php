@@ -68,6 +68,7 @@ class TwoteAPI extends API
                 switch($this->verb){
                     case 'status':
                         $person = new Person($_SESSION[SESSION_KEY]);
+                        $person->setPassword(null);
                         break;
                     default:
                         $person = Person::show(new Person($_SESSION[SESSION_KEY]), $this->db);
