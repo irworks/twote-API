@@ -25,6 +25,6 @@ if(file_exists(CACHE_DIR)) {
     }
 }
 
-echo PHP_EOL . "Cache was flushed! See you around.";
+echo PHP_EOL . "Cache was flushed! See you around." . PHP_EOL;
 
 ?>
