@@ -8,7 +8,7 @@
 /**
  * Module: Main API handler
  * File: v2/twoteAPI.class.php
- * Depends: index.php
+ * Depends: index.php, api.class.php, models
  */
 
 namespace twoteAPI\Classes;
@@ -19,8 +19,6 @@ require_once __DIR__ . '/../models/person.object.php';
 require_once __DIR__ . '/../models/twote.object.php';
 require_once __DIR__ . '/../models/allTwotes.object.php';
 require_once __DIR__ . '/../models/httpHeader.php';
-
-require_once __DIR__ . '/language.class.php';
 
 use twoteAPI\Models\BaseModel;
 use twoteAPI\Models\Person;
