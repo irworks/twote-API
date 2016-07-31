@@ -19,8 +19,8 @@ if(file_exists(CACHE_DIR)) {
         if($file === '.' || $file === '..') {
             continue;
         }
-        
-        unlink(__DIR__ . "/" . $file);
+
+        unlink(CACHE_DIR . $file);
         echo "- Deleted \"" . $file . "\"" . PHP_EOL;
     }
 }
