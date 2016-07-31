@@ -23,12 +23,12 @@ if(file_exists(__DIR__ . '/../config.php')) {
     exit();
 }
 
-echo' |----------------------------------------------|\n';
-echo' |                                              |\n';
-echo '|                twote API v2                  |\n';
-echo '|           ~ Maintenance tools ~              |\n';
-echo '|                                              |\n';
-echo '|----------------------------------------------|\n\n';
+echo "|----------------------------------------------|" . PHP_EOL;
+echo "|                                              |" . PHP_EOL;
+echo "|                 twote API                    |" . PHP_EOL;
+echo "|           ~ Maintenance tools ~              |" . PHP_EOL;
+echo "|                                              |" . PHP_EOL;
+echo "|----------------------------------------------|" . PHP_EOL . PHP_EOL;
 
 
 ?>

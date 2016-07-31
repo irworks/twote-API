@@ -12,15 +12,19 @@
  */
 require_once 'script-header.php';
 
-echo 'Cache will now be flushed... \n\n';
+echo "Cache will now be flushed..." . PHP_EOL . PHP_EOL;
 
 if(file_exists(CACHE_DIR)) {
     foreach (scandir(CACHE_DIR) as $file) {
-        unlink($file);
-        echo '- Deleted "' . $file . '" \n';
+        if($file === '.' || $file === '..') {
+            continue;
+        }
+        
+        unlink(__DIR__ . "/" . $file);
+        echo "- Deleted \"" . $file . "\"" . PHP_EOL;
     }
 }
 
-echo '\nCache was flushed! See you around.';
+echo PHP_EOL . "Cache was flushed! See you around.";
 
 ?>
