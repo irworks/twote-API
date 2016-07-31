@@ -58,30 +58,31 @@ class Language
 
         $output = "<?php" . PHP_EOL;
         $output .= '/**' .PHP_EOL;
-        $output .= ' * This class is code generated. To flush the cache, delete it.' .PHP_EOL;
+        $output .= ' * This class is code generated. To flush the cache, delete it.' . PHP_EOL;
+        $output .= ' * This file was generated at: ' . date("Y-m-d H:i:s") . PHP_EOL;
         $output .= '*/' . PHP_EOL . PHP_EOL;
         $output .= 'namespace twoteAPI\Classes;' . PHP_EOL . PHP_EOL . PHP_EOL;
         $output .= 'class LanguageCache {' . PHP_EOL;
 
-        $output .= "public static \$LANG_ARRAY = array(" . PHP_EOL;
+        $output .= "    public static \$LANG_ARRAY = array(" . PHP_EOL;
 
         //I am sorry for using SELECT *, but i don't want to be harding value_en, value_de etc.
         $query = "SELECT * FROM language";
         $result = $this->db->query($query);
 
         while ($result && $row = $result->fetch_assoc()) {
-            $output .= "'" . $row['lang_key'] . "' => array(" . PHP_EOL;
+            $output .= "        '" . $row['lang_key'] . "' => array(" . PHP_EOL;
 
             foreach ($row as $key => $value) {
                 if(strpos($key, 'value_') !== false) {
-                    $output .= "'" . str_replace('value_', '', $key) . "' => '" . $value . "'," . PHP_EOL;
+                    $output .= "        '" . str_replace('value_', '', $key) . "' => '" . $value . "'," . PHP_EOL;
                 }
             }
 
-            $output .= '), ' . PHP_EOL . PHP_EOL;
+            $output .= '    ), ' . PHP_EOL . PHP_EOL;
         }
 
-        $output .= ");" . PHP_EOL;
+        $output .= "    );" . PHP_EOL;
         $output .= "}" . PHP_EOL;
         $output .= PHP_EOL . '?>';
         file_put_contents(LANG_CACHE_FILE, $output);
