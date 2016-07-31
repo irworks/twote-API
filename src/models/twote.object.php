@@ -38,7 +38,7 @@ class Twote extends BaseModel
 
         $query = "
                 INSERT INTO " . $db->getTables()->TWOTES . "
-                  (twote_id, content, dateTime, id_user)
+                  (twote_id, content, createDateTime, id_user)
                 VALUES
                  (" . $db->cl($twote_id = self::getNewTwoteID($db)) . "," . $db->cl($twote->getContent()) . ", NOW(), " . $person->getUserId() . ")";
 
@@ -100,7 +100,7 @@ class Twote extends BaseModel
      */
     public static function show($twote_id, DB $db) {
         $query = "
-                SELECT twote_id, content, dateTime, id_user
+                SELECT twote_id, content, createDateTime, id_user
                     FROM " . $db->getTables()->TWOTES . "
                 WHERE twote_id = " . $db->cl($twote_id);
 
