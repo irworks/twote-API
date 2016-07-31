@@ -12,10 +12,18 @@
  */
 
 namespace twoteAPI\Classes;
-
+require_once 'mySQLTables.class.php';
 
 class DB extends \mysqli
 {
+    public $tables;
+
+    function __construct($host, $username, $passwd, $dbname, $port, $socket) {
+        parent::__construct($host, $username, $passwd, $dbname, $port, $socket);
+
+        $this->tables = new MySQLTables();
+    }
+
     public function cl($input) {
 
         if ($input === NULL || $input === false) {
