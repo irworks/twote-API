@@ -6,6 +6,7 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 
 **Important:** This API expects all HTTP Body data as *JSON Strings!*
 **Always** send the following *HTTP Headers*. (Yes, they are named so ugly because HTTP Headers should be named like this. :( )
+**Always** set the session cookie!
 
   `headers`:
 - `Devicetype` => {ios, android, windows, toaster, my_cat}
@@ -20,7 +21,8 @@ This is the new **API** for [WhiteWhale Studios' twote](https://t.whitewhale.stu
 `/account` - Endoint:
 - `/login` _POST_ of a **PersonModel** with `{"username":"test", "password":"test"}`
 - `/*user_id*` _PUT_ of a **PersonModel** with `{"user_id":1, "email":"test@domain.tld","language":"en"}`
-- `/` _GET_
+- `/` _GET_ - provides you a **PersonModel**
+- `/status` _GET_ - provides you an incomplete a **PersonModel** if the session is valid, code 9801 if not
 - `/logout` _POST_
 
 
