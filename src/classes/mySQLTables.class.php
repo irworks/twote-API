@@ -19,15 +19,15 @@ class MySQLTables
     /**
      * @var $USERS - The table in which all accounts will be stored.
      */
-    public static $USERS = 'users';
+    public $USERS = 'users';
 
     /**
      * @var $USERS - The table in which all twotes will be stored.
      */
-    public static $TWOTES = 'twotes';
+    public $TWOTES = 'twotes';
 
     /**
      * @var $USERS - The table in which the translation strings will be stored.
      */
-    public static $LANGUAGE = 'language';
+    public $LANGUAGE = 'language';
 }

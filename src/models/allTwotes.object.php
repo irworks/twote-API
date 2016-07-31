@@ -34,7 +34,7 @@ class AllTwotes extends BaseModel
 
         $query = "
                 SELECT twote_id, content, dateTime, id_user
-                    FROM twotes
+                    FROM " . $db->getTables()->TWOTES . "
                 WHERE id_user = " . $db->cl($user_id);
 
         $result = $db->query($query);

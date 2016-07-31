@@ -67,7 +67,7 @@ class Language
         $output .= "    public static \$LANG_ARRAY = array(" . PHP_EOL;
 
         //I am sorry for using SELECT *, but i don't want to be harding value_en, value_de etc.
-        $query = "SELECT * FROM language";
+        $query = "SELECT * FROM " . $this->db->getTables()->LANGUAGE;
         $result = $this->db->query($query);
 
         while ($result && $row = $result->fetch_assoc()) {

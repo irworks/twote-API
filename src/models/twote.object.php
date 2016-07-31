@@ -37,7 +37,7 @@ class Twote extends BaseModel
         }
 
         $query = "
-                INSERT INTO twotes
+                INSERT INTO " . $db->getTables()->TWOTES . "
                   (twote_id, content, dateTime, id_user)
                 VALUES
                  (" . $db->cl($twote_id = self::getNewTwoteID($db)) . "," . $db->cl($twote->getContent()) . ", NOW(), " . $person->getUserId() . ")";
@@ -101,7 +101,7 @@ class Twote extends BaseModel
     public static function show($twote_id, DB $db) {
         $query = "
                 SELECT twote_id, content, dateTime, id_user
-                    FROM twotes
+                    FROM " . $db->getTables()->TWOTES . "
                 WHERE twote_id = " . $db->cl($twote_id);
 
         $result = $db->query($query);
@@ -123,7 +123,7 @@ class Twote extends BaseModel
     public static function delete($twote_id, Person $person, DB $db) {
         $query = "
                 DELETE
-                    FROM twotes
+                    FROM " . $db->getTables()->TWOTES . "
                 WHERE twote_id = " . $db->cl($twote_id) . "
                     AND
                 id_user  = " . $db->cl($person->getUserId());
@@ -147,7 +147,7 @@ class Twote extends BaseModel
             $id = mt_rand(1000000000, 9999999999);
             $idIsAvailable = false;
 
-            $query = "SELECT twote_id FROM twotes WHERE twote_id = " . $db->cl($id);
+            $query = "SELECT twote_id FROM " . $db->getTables()->TWOTES . " WHERE twote_id = " . $db->cl($id);
             $result = $db->query($query);
 
             if($result && $db->affected_rows == 0){

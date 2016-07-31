@@ -40,7 +40,7 @@ class Person extends BaseModel
         
         $query = "
             SELECT user_id, username, password, salt, activated
-			  FROM users
+			  FROM " . $db->getTables()->USERS . "
 			WHERE username = LOWER(" . $db->cl($person->getUsername()) . ")";
 
         $result = $db->query($query);
@@ -85,7 +85,7 @@ class Person extends BaseModel
         }
 
         $query = "
-            UPDATE users SET 
+            UPDATE " . $db->getTables()->USERS . " SET 
               email    = " . $db->cl($person->getEmail()) . ",
               language = " . $db->cl($person->getLanguage());
 
@@ -117,7 +117,7 @@ class Person extends BaseModel
     public static function show(Person $person, DB $db) {
         $query = "
             SELECT user_id, username, email, language
-			  FROM users
+			  FROM " . $db->getTables()->USERS . "
 			WHERE user_id = " . $db->cl($person->getUserId()) . " AND activated = 1";
 
         $result = $db->query($query);
@@ -136,7 +136,7 @@ class Person extends BaseModel
     private static function getSaltForUserID($user_id, DB $db) {
         $query = "
             SELECT salt
-			  FROM users
+			  FROM " . $db->getTables()->USERS . "
 			WHERE user_id = " . $db->cl($user_id);
         $result = $db->query($query);
 

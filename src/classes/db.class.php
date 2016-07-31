@@ -16,7 +16,7 @@ require_once 'mySQLTables.class.php';
 
 class DB extends \mysqli
 {
-    public $tables;
+    private $tables;
 
     function __construct($host, $username, $passwd, $dbname, $port, $socket) {
         parent::__construct($host, $username, $passwd, $dbname, $port, $socket);
@@ -51,6 +51,13 @@ class DB extends \mysqli
         }
 
         return $out;
+    }
+
+    /**
+     * @return MySQLTables
+     */
+    public function getTables() {
+        return $this->tables;
     }
     
 }
