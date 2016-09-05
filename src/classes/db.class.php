@@ -18,8 +18,8 @@ class DB extends \mysqli
 {
     private $tables;
 
-    function __construct($host, $username, $passwd, $dbname, $port, $socket) {
-        parent::__construct($host, $username, $passwd, $dbname, $port, $socket);
+    function __construct($host, $username, $passwd, $dbname) {
+        parent::__construct($host, $username, $passwd, $dbname);
 
         $this->tables = new MySQLTables();
     }
